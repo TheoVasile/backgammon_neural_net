@@ -25,24 +25,34 @@ class make_piece:
         self.color = [(0,0,0),(255,255,255)][self.team - 1]
         self.id = id
     def move(self,value):
-        print ("id = {}".format(self.id))
-        self.ids = []
-        for self.p in spots[self.position]:
-            self.ids.append(self.p.get_id())
-        print (self.ids)
-        #print(spots[self.position])
-        spots[self.position].remove(self)
-        if len(spots[self.position]) < 1:
-            spots[self.position] = [False]
         if self.position + (value * self.direction) not in range(1,25):
             print ("out of bounds")
             return False
+        print ("id = {}".format(self.id))
+        self.ids = []
+        #print(spots[self.position])
+        spots[self.position].remove(self)
+        print ("spotsi = {}".format(spots[self.position]))
+        if len(spots[self.position]) < 1:
+            spots[self.position] = [False]
         self.position += value * self.direction
-        spots[self.position].append(self)
+        print("spotsf = {}".format(spots[self.position]))
+        self.ids = []
+        if len(spots[self.position]) < 1:
+            for self.p in spots[self.position]:
+                print (self.p)
+                self.ids.append(self.p.get_id())
+        print("pi = {}".format(self.ids))
         try:
             spots[self.position].remove(False)
         except:
             pass
+        spots[self.position].append(self)
+        self.ids = []
+        for self.p in spots[self.position]:
+            self.ids.append(self.p.get_id())
+        print ("pf = {}".format(self.ids))
+        print ("---------------------")
 
         return True
 
@@ -99,7 +109,7 @@ class make_die:
         return self.value
 
 pieces = {1:[],2:[]}
-spots = {1:[make_piece(1,1,1),make_piece(1,1,2)],2:[False],3:[False],4:[False],5:[False],6:[make_piece(6,2,3), make_piece(6,2,4), make_piece(6,2,5), make_piece(6,2,6), make_piece(6,2,7)],7:[False],8:[make_piece(8,2,8),make_piece(8,2,9),make_piece(8,2,10)],9:[False],10:[False],11:[False],12:[make_piece(12,1,11),make_piece(12,1,12),make_piece(12,1,13),make_piece(12,1,14),make_piece(12,1,15)],13:[make_piece(13,2,16),make_piece(13,2,17)],14:[False],15:[False],16:[False],17:[False],18:[make_piece(12,1,18),make_piece(12,1,19),make_piece(12,1,20),make_piece(12,1,21),make_piece(12,1,22)],19:[False],20:[make_piece(20,1,23),make_piece(20,1,24),make_piece(20,1,25)],21:[False],22:[False],23:[False],24:[make_piece(24,2,26),make_piece(24,2,27),make_piece(24,2,28),make_piece(24,2,29),make_piece(24,2,30)]}
+spots = {1:[make_piece(1,1,1),make_piece(1,1,2)],2:[False],3:[False],4:[False],5:[False],6:[make_piece(6,2,3), make_piece(6,2,4), make_piece(6,2,5), make_piece(6,2,6), make_piece(6,2,7)],7:[False],8:[make_piece(8,2,8),make_piece(8,2,9),make_piece(8,2,10)],9:[False],10:[False],11:[False],12:[make_piece(12,1,11),make_piece(12,1,12),make_piece(12,1,13),make_piece(12,1,14),make_piece(12,1,15)],13:[make_piece(13,2,16),make_piece(13,2,17)],14:[False],15:[False],16:[False],17:[False],18:[make_piece(18,1,18),make_piece(18,1,19),make_piece(18,1,20),make_piece(18,1,21),make_piece(18,1,22)],19:[False],20:[make_piece(20,1,23),make_piece(20,1,24),make_piece(20,1,25)],21:[False],22:[False],23:[False],24:[make_piece(24,2,26),make_piece(24,2,27),make_piece(24,2,28),make_piece(24,2,29),make_piece(24,2,30)]}
 for position in range(1,25):
     if spots[position][0]:
         for piece_index in range(0,len(spots[position])):
